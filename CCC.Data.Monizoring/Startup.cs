@@ -1,11 +1,14 @@
+using CCC.Data.Monitoring.Data.Access;
+using CCC.Data.Monitoring.Data.Access.EFCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace CCC.Data.Monizoring
+namespace CCC.Data.Monitoring
 {
     public class Startup
     {
@@ -21,6 +24,12 @@ namespace CCC.Data.Monizoring
         {
 
             services.AddControllersWithViews();
+
+            services.AddDbContext<MonitoringDbContext>(opt => opt.UseInMemoryDatabase(databaseName: "CCCMonitoring"));
+
+            var context = services.BuildServiceProvider().GetService<MonitoringDbContext>();
+            DataGenerator dataGenerator = new DataGenerator(context, Configuration);
+            dataGenerator.AddData();
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

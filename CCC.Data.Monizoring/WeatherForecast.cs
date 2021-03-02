@@ -1,6 +1,6 @@
 using System;
 
-namespace CCC.Data.Monizoring
+namespace CCC.Data.Monitoring
 {
     public class WeatherForecast
     {

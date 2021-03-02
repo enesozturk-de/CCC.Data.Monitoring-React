@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CCC.Data.Monizoring.Controllers
+namespace CCC.Data.Monitoring.Controllers
 {
     [ApiController]
     [Route("[controller]")]

@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CCC.Data.Monitoring.Concrete\CCC.Data.Monitoring.Concrete.csproj" />
+  </ItemGroup>
+
 </Project>
