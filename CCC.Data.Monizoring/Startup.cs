@@ -1,3 +1,4 @@
+using CCC.Data.Monitoring.Controllers;
 using CCC.Data.Monitoring.Data.Access;
 using CCC.Data.Monitoring.Data.Access.EFCore;
 using Microsoft.AspNetCore.Builder;
@@ -25,24 +26,24 @@ namespace CCC.Data.Monitoring
 
             services.AddControllersWithViews();
 
-            services.AddDbContext<MonitoringDbContext>(opt => opt.UseInMemoryDatabase(databaseName: "CCCMonitoring"));
-
-            var context = services.BuildServiceProvider().GetService<MonitoringDbContext>();
-            DataGenerator dataGenerator = new DataGenerator(context, Configuration);
-            dataGenerator.AddData();
+            services.AddDbContext<MonitoringDbContext>(opt => opt.UseInMemoryDatabase(databaseName: "CCCMonitoring")); 
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/build";
             });
+             
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, MonitoringDbContext context)
         {
             if (env.IsDevelopment())
-            {
+            { 
+                DataGenerator dataGenerator = new DataGenerator(context, Configuration);
+                dataGenerator.GenerateData(); 
+
                 app.UseDeveloperExceptionPage();
             }
             else

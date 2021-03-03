@@ -1,5 +1,6 @@
 [
   {
+    "ID": 1,
     "TalkTime": 10000,
     "AfterCallWorkTime": 20000,
     "Handled": 20,
@@ -8,6 +9,7 @@
     "QueueGroupID": 1
   },
   {
+    "ID": 2,
     "TalkTime": 20000,
     "AfterCallWorkTime": 15000,
     "Handled": 40,
@@ -16,6 +18,7 @@
     "QueueGroupID": 2
   },
   {
+    "ID": 3,
     "TalkTime": 15000,
     "AfterCallWorkTime": 12500,
     "Handled": 500,
@@ -24,6 +27,7 @@
     "QueueGroupID": 3
   },
   {
+    "ID": 4,
     "TalkTime": 16000,
     "AfterCallWorkTime": 10000,
     "Handled": 134,

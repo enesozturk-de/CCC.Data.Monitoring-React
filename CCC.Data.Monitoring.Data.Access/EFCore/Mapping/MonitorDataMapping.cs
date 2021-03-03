@@ -11,13 +11,13 @@ namespace CCC.Data.Monitoring.Data.Access.EFCore.Mapping
     {
         public void Configure(EntityTypeBuilder<MonitorData> builder)
         {
-            builder.HasNoKey();
+            builder.HasKey(x => x.ID);
             builder.Property(x => x.AfterCallWorkTime);
             builder.Property(x => x.Handled);
             builder.Property(x => x.HandledWithinSL);
             builder.Property(x => x.Offered);
             builder.Property(x => x.TalkTime);
-            builder.Property(x => x.QueueGroupId);
+            builder.Property(x => x.QueueGroupID); 
         }
     }
 }

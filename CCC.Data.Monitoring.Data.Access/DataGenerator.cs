@@ -18,7 +18,7 @@ namespace CCC.Data.Monitoring.Data.Access
             _monitoringDbContext = dbContext;
             _configuartion = configuration;
         }
-        public void AddData()
+        public void GenerateData()
         {
             var accountJsonString = DataGenerationHelper.GetJsonDataString(Constants.Account);
             var monitorDataJsonString = DataGenerationHelper.GetJsonDataString(Constants.MonitorData);
@@ -30,17 +30,17 @@ namespace CCC.Data.Monitoring.Data.Access
 
             foreach (var account in accountList)
             {
-                _monitoringDbContext.AddAsync(account);
+                _monitoringDbContext.Account.AddAsync(account);
             }
 
             foreach (var monitorData in monitorDataList)
             {
-                _monitoringDbContext.AddAsync(monitorData);
+                _monitoringDbContext.MonitorData.AddAsync(monitorData);
             }
 
             foreach (var queueGroup in queueGroupList)
             {
-                _monitoringDbContext.AddAsync(queueGroup);
+                _monitoringDbContext.QueueGroup.AddAsync(queueGroup);
             }
 
             _monitoringDbContext.SaveChanges();
@@ -48,12 +48,12 @@ namespace CCC.Data.Monitoring.Data.Access
 
         public void RemoveData()
         {
-            throw new System.NotImplementedException();
+            //ENES: Ne need to fill for this project
         }
 
         public void UpdateData()
         {
-            throw new System.NotImplementedException();
+            //ENES: Ne need to fill for this project
         }
     }
 }

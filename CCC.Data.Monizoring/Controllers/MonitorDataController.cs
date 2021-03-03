@@ -32,8 +32,8 @@ namespace CCC.Data.Monitoring.Controllers
 
             foreach (var monitorData in monitorDatas)
             {
-                var currentQueueGroup = queueGroups.SingleOrDefault(x => x.ID == monitorData.QueueGroupId);
-                screenDatas.Add(new ScreenData 
+                var currentQueueGroup = queueGroups.SingleOrDefault(x => x.ID == monitorData.QueueGroupID);
+                screenDatas.Add(new ScreenData
                 {
                     Handled = monitorData.Handled,
                     Offered = monitorData.Offered,
@@ -42,7 +42,7 @@ namespace CCC.Data.Monitoring.Controllers
                     AverageTalkTime = OperationHelper.CalculateAverageTalkTime(monitorData),
                     ServiceLevel = OperationHelper.CalculateServiceLevel(monitorData),
                     ColumnColour = OperationHelper.DecideColumnColour(currentQueueGroup)
-                    
+
                 });
             }
 
