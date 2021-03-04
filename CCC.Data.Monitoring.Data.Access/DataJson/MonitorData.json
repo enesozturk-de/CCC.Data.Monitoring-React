@@ -42,7 +42,7 @@
     "Handled": 2,
     "Offered": 4,
     "HandledWithinSL": 13,
-    "QueueGroupID": 1
+    "QueueGroupID": 5
   },
   {
     "ID": 6,
@@ -51,7 +51,7 @@
     "Handled": 23,
     "Offered": 43,
     "HandledWithinSL": 3812,
-    "QueueGroupID": 2
+    "QueueGroupID": 6
   },
   {
     "ID": 7,
@@ -60,7 +60,7 @@
     "Handled": 100,
     "Offered": 243,
     "HandledWithinSL": 149,
-    "QueueGroupID": 3
+    "QueueGroupID": 7
   },
   {
     "ID": 8,
@@ -69,6 +69,6 @@
     "Handled": 98,
     "Offered": 78,
     "HandledWithinSL": 122,
-    "QueueGroupID": 4
+    "QueueGroupID": 8
   }
 ]

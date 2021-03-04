@@ -17,6 +17,8 @@ namespace CCC.Data.Monitoring.Concrete.Constants
         public static readonly int MaxValue = 100;
         public static readonly int MinValue = 0;
 
+        public static readonly int RetryTime = 8;
+
         public static readonly string Green = "#00FF00";
         public static readonly string Red = "#FF4500";
 

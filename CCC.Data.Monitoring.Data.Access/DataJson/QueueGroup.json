@@ -22,5 +22,29 @@
     "Name": "Mercedes",
     "SLA_Percent": 80,
     "SLA_Time": 20
+  },
+  {
+    "ID": 5,
+    "Name": "Fiat",
+    "SLA_Percent": 0,
+    "SLA_Time": 20
+  },
+  {
+    "ID": 6,
+    "Name": "Maserati",
+    "SLA_Percent": 90,
+    "SLA_Time": 60
+  },
+  {
+    "ID": 7,
+    "Name": "Opel",
+    "SLA_Percent": 80,
+    "SLA_Time": 20
+  },
+  {
+    "ID": 8,
+    "Name": "Ford",
+    "SLA_Percent": 80,
+    "SLA_Time": 20
   }
 ]

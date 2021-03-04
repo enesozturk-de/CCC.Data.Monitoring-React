@@ -12,10 +12,10 @@ export class Login extends Component {
         this.state = { isSuccess: Boolean, userName: String, password: String }
         this.loginOnClick = this.loginOnClick.bind(this);
         this.checkLoggedInStatus = this.checkLoggedInStatus.bind(this);
+        this.alertDismissibleExample = this.alertDismissibleExample.bind(this);
     }
 
-    loginOnClick(event) {
-        console.log("Clicked");
+    loginOnClick(event) { 
         event.preventDefault();
         this.sendLoginRequest();
     }
@@ -36,21 +36,22 @@ export class Login extends Component {
         };
 
         fetch('api/user/login', requestOptions)
-            .then(this.checkLoggedInStatus);
+            .then(this.checkLoggedInStatus)
+            .catch(this.alertDismissibleExample);
     }
 
     checkLoggedInStatus(res) {
         if (res.status >= 200 && res.status < 300) {
             this.setState({ isSuccess: true });
-        } else {
-
+        } else if (res.status == 599) {
+            this.setState({ isSuccess: false });
+            this.alertDismissibleExample();
         }
     }
 
     alertDismissibleExample() {
         return (
-            <Alert variant="danger" dismissible>
-                <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
+            <Alert variant="danger" dismissible> 
                 <p>
                     Change this and that and try again. Duis mollis, est non commodo
                     luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
@@ -63,9 +64,7 @@ export class Login extends Component {
     render() {
         if (this.state.isSuccess === true) {
             return <Redirect to="/monitor-data" />;
-        } else {
-            this.alertDismissibleExample();
-        }
+        }  
         return (
             <Form onSubmit={event => this.loginOnClick(event)}>
                 <Form.Group controlId="formBasicEmail">
