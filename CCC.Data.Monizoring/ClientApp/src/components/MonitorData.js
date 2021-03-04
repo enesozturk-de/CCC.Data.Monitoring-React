@@ -10,9 +10,13 @@ export class MonitorData extends Component {
 
     componentDidMount() {
         this.populateMonitorData();
+        this.interval = setInterval(() => {
+            this.populateMonitorData();
+        }, 10000);
+        
     }
 
-    static renderForecastsTable(monitordatas) {
+    static renderMonitorDataTable(monitordatas) {
         return (
             <table className='table table-striped' aria-labelledby="tabelLabel">
                 <thead>
@@ -27,7 +31,7 @@ export class MonitorData extends Component {
                 </thead>
                 <tbody>
                     {monitordatas.map(monitordata =>
-                        <tr key={monitordata.queueGroupName}>
+                        <tr key={monitordata.queueGroupName} style={{ background: monitordata.columnColour }}>
                             <td>{monitordata.queueGroupName}</td>
                             <td>{monitordata.offered}</td>
                             <td>{monitordata.handled}</td>
@@ -43,13 +47,13 @@ export class MonitorData extends Component {
 
     render() {
         let contents = this.state.loading
-            ? <p><em>Loading...</em></p>
-            : MonitorData.renderForecastsTable(this.state.monitordata);
+            ? <p><em>Can`t Reach Whitout Logged In</em></p>
+            : MonitorData.renderMonitorDataTable(this.state.monitordata);
 
         return (
             <div>
                 <h1 id="tabelLabel" >Monitor Data</h1>
-                <p>Monitoring Data Component for Enes OZTURK.</p>
+                <p>Monitoring Data Component for CCC.</p>
                 {contents}
             </div>
         );

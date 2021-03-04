@@ -7,5 +7,6 @@ namespace CCC.Data.Monitoring.Concrete.Interfaces
         void GenerateData();
         void RemoveData();
         void UpdateData();
+        void UpdateTableWithRandomData();
     }
 }

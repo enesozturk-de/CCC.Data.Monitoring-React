@@ -10,6 +10,11 @@ namespace CCC.Data.Monitoring.Data.Access.Helper
     { 
         public static T GetData<T>(string jsonString, T defaultValue = default(T))
         {
+            if (jsonString == string.Empty || jsonString == null || jsonString == "")
+            {
+                return defaultValue;
+            }
+
             T result = JsonConvert.DeserializeObject<T>(jsonString);
             return result;
         }

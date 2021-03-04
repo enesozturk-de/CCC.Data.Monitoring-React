@@ -2,7 +2,7 @@
   {
     "ID": 1,
     "Name": "Audi",
-    "SLA_Percent": 80,
+    "SLA_Percent": 0,
     "SLA_Time": 20
   },
   {

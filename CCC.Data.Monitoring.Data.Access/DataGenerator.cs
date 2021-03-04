@@ -5,6 +5,7 @@ using CCC.Data.Monitoring.Data.Access.EFCore;
 using CCC.Data.Monitoring.Data.Access.Helper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 
 namespace CCC.Data.Monitoring.Data.Access
@@ -13,6 +14,7 @@ namespace CCC.Data.Monitoring.Data.Access
     {
         private readonly MonitoringDbContext _monitoringDbContext;
         private readonly IConfiguration _configuartion;
+        List<QueueGroup> _queueGroupList;
         public DataGenerator(MonitoringDbContext dbContext, IConfiguration configuration)
         {
             _monitoringDbContext = dbContext;
@@ -26,7 +28,7 @@ namespace CCC.Data.Monitoring.Data.Access
 
             List<Account> accountList = DataGenerationHelper.GetData<List<Account>>(accountJsonString);
             List<MonitorData> monitorDataList = DataGenerationHelper.GetData<List<MonitorData>>(monitorDataJsonString);
-            List<QueueGroup> queueGroupList = DataGenerationHelper.GetData<List<QueueGroup>>(queueGroupJsonString);
+            _queueGroupList = DataGenerationHelper.GetData<List<QueueGroup>>(queueGroupJsonString);
 
             foreach (var account in accountList)
             {
@@ -38,7 +40,7 @@ namespace CCC.Data.Monitoring.Data.Access
                 _monitoringDbContext.MonitorData.AddAsync(monitorData);
             }
 
-            foreach (var queueGroup in queueGroupList)
+            foreach (var queueGroup in _queueGroupList)
             {
                 _monitoringDbContext.QueueGroup.AddAsync(queueGroup);
             }
@@ -54,6 +56,18 @@ namespace CCC.Data.Monitoring.Data.Access
         public void UpdateData()
         {
             //ENES: Ne need to fill for this project
+        }
+
+        public void UpdateTableWithRandomData()
+        {
+            foreach (var queueGroup in _queueGroupList)
+            {
+                Random random = new Random();
+                queueGroup.SLA_Percent = random.Next(Constants.Minute, Constants.MaxValue);
+            }
+
+            _monitoringDbContext.QueueGroup.UpdateRange(_queueGroupList);
+            _monitoringDbContext.SaveChanges();
         }
     }
 }

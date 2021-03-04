@@ -1,6 +1,7 @@
 ﻿using CCC.Data.Monitoring.Concrete.Entities;
 using CCC.Data.Monitoring.Data.Access.EFCore;
 using CCC.Data.Monitoring.Operations.OperationHelper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -10,9 +11,9 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace CCC.Data.Monitoring.Controllers
-{
+{  
     [Route("api/[controller]")]
-    [ApiController]
+    [ApiController] 
     public class MonitorDataController : ControllerBase
     {
         private readonly MonitoringDbContext _monitoringDbContext;
@@ -24,6 +25,7 @@ namespace CCC.Data.Monitoring.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public List<ScreenData> Get()
         {
             List<ScreenData> screenDatas = new List<ScreenData>();
@@ -41,7 +43,7 @@ namespace CCC.Data.Monitoring.Controllers
                     AverageHandlingTime = OperationHelper.CalculateAverageHandlingTime(monitorData),
                     AverageTalkTime = OperationHelper.CalculateAverageTalkTime(monitorData),
                     ServiceLevel = OperationHelper.CalculateServiceLevel(monitorData),
-                    ColumnColour = OperationHelper.DecideColumnColour(currentQueueGroup)
+                    ColumnColour = OperationHelper.DecideColumnColour(currentQueueGroup, monitorData)
 
                 });
             }

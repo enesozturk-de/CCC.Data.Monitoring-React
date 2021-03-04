@@ -6,7 +6,7 @@ namespace CCC.Data.Monitoring.Concrete.Entities
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public int SLAPercent { get; set; }
-        public int SLATime { get; set; }
+        public int SLA_Percent { get; set; }
+        public int SLA_Time { get; set; }
     }
 }
