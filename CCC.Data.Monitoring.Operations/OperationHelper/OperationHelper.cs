@@ -1,9 +1,6 @@
 ﻿using CCC.Data.Monitoring.Concrete.Constants;
 using CCC.Data.Monitoring.Concrete.Entities;
-using CCC.Data.Monitoring.Concrete.Interfaces;
-using CCC.Data.Monitoring.Operations.Extensions;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
@@ -24,13 +21,14 @@ namespace CCC.Data.Monitoring.Operations.OperationHelper
 
         public static string DecideColumnColour(QueueGroup queueGroup, MonitorData monitorData)
         {
-            return (monitorData.HandledWithinSL / monitorData.Offered) >= queueGroup.SLA_Percent ? Constants.Green : Constants.Red;
+            double seerviceLevel = (Convert.ToDouble(monitorData.HandledWithinSL) / Convert.ToDouble(monitorData.Offered)) * 100;
+            return seerviceLevel >= queueGroup.SLA_Percent ? Constants.Green : Constants.Red;
         }
 
         public static string CalculateServiceLevel(MonitorData monitorData)
         {
-            double result = (Convert.ToDouble(monitorData.HandledWithinSL) * Convert.ToDouble(monitorData.Offered)) / 100;
-            return Math.Round(result,1).ToString();
+            double result = (Convert.ToDouble(monitorData.HandledWithinSL) / Convert.ToDouble(monitorData.Offered)) * 100;
+            return $"{Math.Round(result,1)}%";
         }
 
         public static string FormatValue(double value)

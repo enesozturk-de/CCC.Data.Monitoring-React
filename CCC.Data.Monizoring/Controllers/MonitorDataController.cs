@@ -2,16 +2,13 @@
 using CCC.Data.Monitoring.Data.Access.EFCore;
 using CCC.Data.Monitoring.Operations.OperationHelper;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace CCC.Data.Monitoring.Controllers
-{  
+{
     [Route("api/[controller]")]
     [ApiController] 
     public class MonitorDataController : ControllerBase

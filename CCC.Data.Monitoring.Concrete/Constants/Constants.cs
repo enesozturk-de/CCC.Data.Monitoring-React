@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CCC.Data.Monitoring.Concrete.Constants
 {
@@ -16,7 +14,7 @@ namespace CCC.Data.Monitoring.Concrete.Constants
         public static readonly int Minute = 60;
         public static readonly int Second = 60;
 
-        public static readonly int MaxValue = 1000;
+        public static readonly int MaxValue = 100;
         public static readonly int MinValue = 0;
 
         public static readonly string Green = "#00FF00";

@@ -2,6 +2,7 @@
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { Redirect } from "react-router-dom";
+import { Alert } from "react-bs-notifier";
 
 export class Login extends Component {
     static displayName = Login.name;
@@ -32,7 +33,7 @@ export class Login extends Component {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(loginModel)
-        }; 
+        };
 
         fetch('api/user/login', requestOptions)
             .then(this.checkLoggedInStatus);
@@ -46,15 +47,30 @@ export class Login extends Component {
         }
     }
 
+    alertDismissibleExample() {
+        return (
+            <Alert variant="danger" dismissible>
+                <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
+                <p>
+                    Change this and that and try again. Duis mollis, est non commodo
+                    luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
+                    Cras mattis consectetur purus sit amet fermentum.
+                </p>
+            </Alert>
+        );
+    }
+
     render() {
         if (this.state.isSuccess === true) {
             return <Redirect to="/monitor-data" />;
+        } else {
+            this.alertDismissibleExample();
         }
         return (
             <Form onSubmit={event => this.loginOnClick(event)}>
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>User Name</Form.Label>
-                    <Form.Control type="text" placeholder="Enter username" onChange={event => this.setState({ userName: event.target.value })} /> 
+                    <Form.Control type="text" placeholder="Enter username" onChange={event => this.setState({ userName: event.target.value })} />
                 </Form.Group>
 
                 <Form.Group controlId="formBasicPassword">
@@ -63,7 +79,7 @@ export class Login extends Component {
                     <Form.Text className="text-muted">
                         We'll never share your password with anyone else.
                    </Form.Text>
-                </Form.Group> 
+                </Form.Group>
                 <Button variant="primary" type="submit">
                     Log In
                 </Button>

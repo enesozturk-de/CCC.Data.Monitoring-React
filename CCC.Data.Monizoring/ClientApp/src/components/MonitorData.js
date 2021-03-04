@@ -21,23 +21,23 @@ export class MonitorData extends Component {
             <table className='table table-striped' aria-labelledby="tabelLabel">
                 <thead>
                     <tr>
-                        <th>QueueGroupName</th>
+                        <th>Queue Group Name</th>
                         <th>Offered</th>
                         <th>Handled</th>
-                        <th>AverageTalkTime</th>
-                        <th>AverageHandlingTime</th>
-                        <th>ServiceLevel</th> 
+                        <th>Average Talk Time</th>
+                        <th>Average Handling Time</th>
+                        <th>Service Level</th> 
                     </tr>
                 </thead>
                 <tbody>
                     {monitordatas.map(monitordata =>
-                        <tr key={monitordata.queueGroupName} style={{ background: monitordata.columnColour }}>
+                        <tr key={monitordata.queueGroupName}>
                             <td>{monitordata.queueGroupName}</td>
                             <td>{monitordata.offered}</td>
                             <td>{monitordata.handled}</td>
                             <td>{monitordata.averageTalkTime}</td>
                             <td>{monitordata.averageHandlingTime}</td>
-                            <td>{monitordata.serviceLevel}</td> 
+                            <td style={{ background: monitordata.columnColour }}>{monitordata.serviceLevel}</td> 
                         </tr>
                     )}
                 </tbody>

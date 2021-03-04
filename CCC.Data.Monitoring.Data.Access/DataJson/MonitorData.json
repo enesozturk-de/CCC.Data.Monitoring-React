@@ -34,5 +34,41 @@
     "Offered": 136,
     "HandledWithinSL": 132,
     "QueueGroupID": 4
+  },
+  {
+    "ID": 5,
+    "TalkTime": 1000,
+    "AfterCallWorkTime": 2000,
+    "Handled": 2,
+    "Offered": 4,
+    "HandledWithinSL": 13,
+    "QueueGroupID": 1
+  },
+  {
+    "ID": 6,
+    "TalkTime": 2000,
+    "AfterCallWorkTime": 1500,
+    "Handled": 23,
+    "Offered": 43,
+    "HandledWithinSL": 3812,
+    "QueueGroupID": 2
+  },
+  {
+    "ID": 7,
+    "TalkTime": 1500,
+    "AfterCallWorkTime": 1200,
+    "Handled": 100,
+    "Offered": 243,
+    "HandledWithinSL": 149,
+    "QueueGroupID": 3
+  },
+  {
+    "ID": 8,
+    "TalkTime": 1600,
+    "AfterCallWorkTime": 1000,
+    "Handled": 98,
+    "Offered": 78,
+    "HandledWithinSL": 122,
+    "QueueGroupID": 4
   }
 ]

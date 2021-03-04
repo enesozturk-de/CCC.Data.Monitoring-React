@@ -14,7 +14,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CCC.Data.Monitoring.Controllers
-{ 
+{
     [Route("api/[controller]/[action]")]
     public class UserController : Controller
     {
@@ -28,8 +28,8 @@ namespace CCC.Data.Monitoring.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login([FromBody]LoginEntity loginEntity)
-        { 
+        public IActionResult Login([FromBody] LoginEntity loginEntity)
+        {
             Guard.Against.NullOrEmpty(loginEntity.Username, nameof(loginEntity.Username));
             Guard.Against.NullOrWhiteSpace(loginEntity.Username, nameof(loginEntity.Username));
 
@@ -40,18 +40,16 @@ namespace CCC.Data.Monitoring.Controllers
             }
             if (OperationHelper.VerifyPassword(loginEntity.Password, currentUser))
             {
-                if (updateControlFlag)
-                {
-                    var startTimeSpan = TimeSpan.Zero;
-                    var periodTimeSpan = TimeSpan.FromSeconds(7);
 
-                    var timer = new System.Threading.Timer((e) =>
-                    {
-                        updateControlFlag = true;
-                        DataGenerator dataGenerator = new DataGenerator(_monitoringDbContext, _configuration);
-                        dataGenerator.UpdateTableWithRandomData();
-                    }, null, startTimeSpan, periodTimeSpan); 
-                }
+                var startTimeSpan = TimeSpan.Zero;
+                var periodTimeSpan = TimeSpan.FromSeconds(8);
+
+                var timer = new System.Threading.Timer((e) =>
+                {
+                    updateControlFlag = true;
+                    DataGenerator dataGenerator = new DataGenerator(_monitoringDbContext, _configuration);
+                    dataGenerator.UpdateTableWithRandomData();
+                }, null, startTimeSpan, periodTimeSpan);
 
                 return this.Ok(true);
             }
