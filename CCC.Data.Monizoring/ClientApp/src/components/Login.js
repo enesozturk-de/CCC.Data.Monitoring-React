@@ -54,15 +54,15 @@ export class Login extends Component {
             <Form onSubmit={event => this.loginOnClick(event)}>
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>User Name</Form.Label>
-                    <Form.Control type="text" placeholder="Enter username" onChange={event => this.setState({ userName: event.target.value })} />
-                    <Form.Text className="text-muted">
-                        We'll never share your email with anyone else.
-                   </Form.Text>
+                    <Form.Control type="text" placeholder="Enter username" onChange={event => this.setState({ userName: event.target.value })} /> 
                 </Form.Group>
 
                 <Form.Group controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" placeholder="Password" onChange={event => this.setState({ password: event.target.value })} />
+                    <Form.Text className="text-muted">
+                        We'll never share your password with anyone else.
+                   </Form.Text>
                 </Form.Group> 
                 <Button variant="primary" type="submit">
                     Log In
