@@ -2,17 +2,12 @@
 using CCC.Data.Monitoring.Concrete.Entities;
 using CCC.Data.Monitoring.Data.Access;
 using CCC.Data.Monitoring.Data.Access.EFCore;
-using CCC.Data.Monitoring.Data.Access.Helper;
 using CCC.Data.Monitoring.Operations.Extensions;
 using CCC.Data.Monitoring.Operations.OperationHelper;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CCC.Data.Monitoring.Controllers
 {
@@ -20,8 +15,7 @@ namespace CCC.Data.Monitoring.Controllers
     public class UserController : Controller
     {
         private readonly MonitoringDbContext _monitoringDbContext;
-        private readonly IConfiguration _configuration;
-        private bool updateControlFlag;
+        private readonly IConfiguration _configuration; 
         public UserController(MonitoringDbContext monitoringDbContext, IConfiguration configuration)
         {
             _monitoringDbContext = monitoringDbContext;
@@ -46,8 +40,7 @@ namespace CCC.Data.Monitoring.Controllers
                 var periodTimeSpan = TimeSpan.FromSeconds(Constants.RetryTime);
 
                 var timer = new System.Threading.Timer((e) =>
-                {
-                    updateControlFlag = true;
+                { 
                     DataGenerator dataGenerator = new DataGenerator(_monitoringDbContext, _configuration);
                     dataGenerator.UpdateTableWithRandomData();
                 }, null, startTimeSpan, periodTimeSpan);

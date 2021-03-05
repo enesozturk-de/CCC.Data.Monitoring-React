@@ -5,7 +5,6 @@ using CCC.Data.Monitoring.Data.Access.EFCore;
 using CCC.Data.Monitoring.Data.Access.Helper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
