@@ -60,7 +60,7 @@ namespace CCC.Data.Monitoring.Data.Access
             foreach (var queueGroup in queueGroups)
             {
                 Random random = new Random();
-                queueGroup.SLA_Percent = random.Next(Constants.MinValue, Constants.MaxValue);
+                queueGroup.SLA_Percent = random.Next(Constants.MinValueSLA_Percent, Constants.MaxValueSLA_Percent);
             }
 
             monitoringDbContext.QueueGroup.UpdateRange(queueGroups);
@@ -70,8 +70,8 @@ namespace CCC.Data.Monitoring.Data.Access
             foreach (var monitorData in monitorDatas)
             {
                 Random random = new Random();
-                monitorData.HandledWithinSL = random.Next(150, 200);
-                monitorData.Offered = random.Next(180, 250);
+                monitorData.HandledWithinSL = random.Next(Constants.MinValueSHandledWithinSL, Constants.MaxValueHandledWithinSL);
+                monitorData.Offered = random.Next(Constants.MinValueOffered, Constants.MaxValueOffered);
             }
             monitoringDbContext.MonitorData.UpdateRange(monitorDatas);
             monitoringDbContext.SaveChanges();

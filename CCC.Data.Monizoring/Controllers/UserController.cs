@@ -30,8 +30,7 @@ namespace CCC.Data.Monitoring.Controllers
                 return this.BadRequest(false);
             }
             if (OperationHelper.VerifyPassword(loginEntity.Password, currentUser))
-            {
-
+            { 
                 var startTimeSpan = TimeSpan.Zero;
                 var periodTimeSpan = TimeSpan.FromSeconds(Constants.RetryTime);
 
