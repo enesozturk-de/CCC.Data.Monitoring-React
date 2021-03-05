@@ -1,6 +1,5 @@
 ﻿using CCC.Data.Monitoring.Concrete.Entities;
 using CCC.Data.Monitoring.Concrete.Interfaces;
-using CCC.Data.Monitoring.Data.Access.EFCore;
 using CCC.Data.Monitoring.Operations.OperationHelper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -15,7 +14,7 @@ namespace CCC.Data.Monitoring.Controllers
     {
         private readonly IMonitorDataRepository _monitorDataRepository;
         private readonly IQueueGroupRepository _queueGroupRepository;
-        public MonitorDataController(MonitoringDbContext monitoringDbContext, IMonitorDataRepository monitorDataRepository, IQueueGroupRepository queueGroupRepository)
+        public MonitorDataController(IMonitorDataRepository monitorDataRepository, IQueueGroupRepository queueGroupRepository)
         {
             _monitorDataRepository = monitorDataRepository;
             _queueGroupRepository = queueGroupRepository;
