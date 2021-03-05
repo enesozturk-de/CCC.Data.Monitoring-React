@@ -2,7 +2,6 @@
 using CCC.Data.Monitoring.Concrete.Entities;
 using CCC.Data.Monitoring.Concrete.Interfaces;
 using CCC.Data.Monitoring.Data.Access;
-using CCC.Data.Monitoring.Data.Access.EFCore;
 using CCC.Data.Monitoring.Operations.Extensions;
 using CCC.Data.Monitoring.Operations.OperationHelper;
 using Microsoft.AspNetCore.Mvc;

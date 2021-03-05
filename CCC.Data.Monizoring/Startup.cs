@@ -1,5 +1,4 @@
 using CCC.Data.Monitoring.Concrete.Interfaces;
-using CCC.Data.Monitoring.Controllers;
 using CCC.Data.Monitoring.Data.Access;
 using CCC.Data.Monitoring.Data.Access.EFCore;
 using CCC.Data.Monitoring.Data.Access.EFCore.Repositories;
@@ -10,7 +9,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
 
 namespace CCC.Data.Monitoring
 {
