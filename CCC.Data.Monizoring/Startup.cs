@@ -1,6 +1,8 @@
+using CCC.Data.Monitoring.Concrete.Interfaces;
 using CCC.Data.Monitoring.Controllers;
 using CCC.Data.Monitoring.Data.Access;
 using CCC.Data.Monitoring.Data.Access.EFCore;
+using CCC.Data.Monitoring.Data.Access.EFCore.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
@@ -27,7 +29,11 @@ namespace CCC.Data.Monitoring
 
             services.AddControllersWithViews();
 
-            services.AddDbContext<MonitoringDbContext>(opt => opt.UseInMemoryDatabase(databaseName: "CCCMonitoring")); 
+            services.AddDbContext<MonitoringDbContext>(opt => opt.UseInMemoryDatabase(databaseName: "CCCMonitoring"));
+            services.AddScoped<IAccountRepository, AccountRepository>();
+            services.AddScoped<IMonitorDataRepository, MonitorDataRepository>();
+            services.AddScoped<IQueueGroupRepository, QueueGroupRepository>();
+
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -38,11 +44,12 @@ namespace CCC.Data.Monitoring
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, MonitoringDbContext context)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, MonitoringDbContext context, IAccountRepository accountRepository,
+                                IMonitorDataRepository monitorDataRepository, IQueueGroupRepository queueGroupRepository)
         {
             if (env.IsDevelopment())
             { 
-                DataGenerator dataGenerator = new DataGenerator(context, Configuration);
+                DataGenerator dataGenerator = new DataGenerator(accountRepository, monitorDataRepository, queueGroupRepository);
                 dataGenerator.GenerateData(); 
 
                 app.UseDeveloperExceptionPage();

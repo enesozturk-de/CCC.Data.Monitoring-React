@@ -1,25 +1,22 @@
 ﻿using CCC.Data.Monitoring.Concrete.Constants;
 using CCC.Data.Monitoring.Concrete.Entities;
+using CCC.Data.Monitoring.Concrete.Interfaces;
 using CCC.Data.Monitoring.Data.Access;
 using CCC.Data.Monitoring.Data.Access.EFCore;
 using CCC.Data.Monitoring.Operations.Extensions;
 using CCC.Data.Monitoring.Operations.OperationHelper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using System;
-using System.Linq;
 
 namespace CCC.Data.Monitoring.Controllers
 {
     [Route("api/[controller]/[action]")]
-    public class UserController : Controller
+    public class UserController : Controller 
     {
-        private readonly MonitoringDbContext _monitoringDbContext;
-        private readonly IConfiguration _configuration; 
-        public UserController(MonitoringDbContext monitoringDbContext, IConfiguration configuration)
+        private readonly IAccountRepository _accountRepository; 
+        public UserController(IAccountRepository accountRepository)
         {
-            _monitoringDbContext = monitoringDbContext;
-            _configuration = configuration;
+            _accountRepository = accountRepository; 
         }
 
         [HttpPost]
@@ -27,8 +24,8 @@ namespace CCC.Data.Monitoring.Controllers
         {
             Guard.Against.NullOrEmpty(loginEntity.Username, nameof(loginEntity.Username));
             Guard.Against.NullOrWhiteSpace(loginEntity.Username, nameof(loginEntity.Username));
-
-            var currentUser = _monitoringDbContext.Account.SingleOrDefault(x => x.Username == loginEntity.Username);
+             
+            var currentUser = _accountRepository.SingleOrDefault(x => x.Username == loginEntity.Username);
             if (currentUser == null)
             {
                 return this.BadRequest(false);
@@ -40,8 +37,8 @@ namespace CCC.Data.Monitoring.Controllers
                 var periodTimeSpan = TimeSpan.FromSeconds(Constants.RetryTime);
 
                 var timer = new System.Threading.Timer((e) =>
-                { 
-                    DataGenerator dataGenerator = new DataGenerator(_monitoringDbContext, _configuration);
+                {
+                    DataGenerator dataGenerator = new DataGenerator();
                     dataGenerator.UpdateTableWithRandomData();
                 }, null, startTimeSpan, periodTimeSpan);
 

@@ -4,7 +4,6 @@ using CCC.Data.Monitoring.Concrete.Interfaces;
 using CCC.Data.Monitoring.Data.Access.EFCore;
 using CCC.Data.Monitoring.Data.Access.Helper;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,12 +12,17 @@ namespace CCC.Data.Monitoring.Data.Access
 {
     public class DataGenerator : IDataGenerator
     {
-        private readonly MonitoringDbContext _monitoringDbContext;
-        private readonly IConfiguration _configuartion; 
-        public DataGenerator(MonitoringDbContext dbContext, IConfiguration configuration )
+        private readonly IMonitorDataRepository _monitorDataRepository;
+        private readonly IQueueGroupRepository _queueGroupRepository;
+        private readonly IAccountRepository _accountRepository;
+        public DataGenerator(IAccountRepository accountRepository, IMonitorDataRepository monitorDataRepository, IQueueGroupRepository queueGroupRepository)
         {
-            _monitoringDbContext = dbContext;
-            _configuartion = configuration; 
+            _monitorDataRepository = monitorDataRepository;
+            _queueGroupRepository = queueGroupRepository;
+            _accountRepository = accountRepository;
+        }
+        public DataGenerator()
+        {
         }
         public void GenerateData()
         {
@@ -32,21 +36,19 @@ namespace CCC.Data.Monitoring.Data.Access
 
             foreach (var account in accountList)
             {
-                _monitoringDbContext.Account.AddAsync(account);
+                _accountRepository.Add(account);
             }
 
             foreach (var monitorData in monitorDataList)
             {
-                _monitoringDbContext.MonitorData.AddAsync(monitorData);
+                _monitorDataRepository.Add(monitorData);
             }
 
             foreach (var queueGroup in queueGroupList)
             {
-                _monitoringDbContext.QueueGroup.AddAsync(queueGroup);
+                _queueGroupRepository.Add(queueGroup);
             }
-
-            _monitoringDbContext.SaveChanges();
-        }  
+        }
 
         public void UpdateTableWithRandomData()
         {
@@ -68,10 +70,10 @@ namespace CCC.Data.Monitoring.Data.Access
             foreach (var monitorData in monitorDatas)
             {
                 Random random = new Random();
-                monitorData.HandledWithinSL = random.Next(150,200);
-                monitorData.Offered = random.Next(180,250);
+                monitorData.HandledWithinSL = random.Next(150, 200);
+                monitorData.Offered = random.Next(180, 250);
             }
-            monitoringDbContext.MonitorData.UpdateRange(monitorDatas);  
+            monitoringDbContext.MonitorData.UpdateRange(monitorDatas);
             monitoringDbContext.SaveChanges();
         }
         public void RemoveData()
