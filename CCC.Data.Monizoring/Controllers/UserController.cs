@@ -11,7 +11,7 @@ using System;
 namespace CCC.Data.Monitoring.Controllers
 {
     [Route("api/[controller]/[action]")]
-    public class UserController : Controller 
+    public class UserController : Controller , IUserController
     {
         private readonly IAccountRepository _accountRepository; 
         public UserController(IAccountRepository accountRepository)
