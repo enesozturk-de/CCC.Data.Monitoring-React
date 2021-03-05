@@ -15,7 +15,7 @@ export class Login extends Component {
         this.alertDismissibleExample = this.alertDismissibleExample.bind(this);
     }
 
-    loginOnClick(event) { 
+    loginOnClick(event) {
         event.preventDefault();
         this.sendLoginRequest();
     }
@@ -51,11 +51,9 @@ export class Login extends Component {
 
     alertDismissibleExample() {
         return (
-            <Alert variant="danger" dismissible> 
+            <Alert variant="danger" dismissible>
                 <p>
-                    Change this and that and try again. Duis mollis, est non commodo
-                    luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
-                    Cras mattis consectetur purus sit amet fermentum.
+                    Please check your information and try again!!!
                 </p>
             </Alert>
         );
@@ -64,25 +62,28 @@ export class Login extends Component {
     render() {
         if (this.state.isSuccess === true) {
             return <Redirect to="/monitor-data" />;
-        }  
+        }
         return (
-            <Form onSubmit={event => this.loginOnClick(event)}>
-                <Form.Group controlId="formBasicEmail">
-                    <Form.Label>User Name</Form.Label>
-                    <Form.Control type="text" placeholder="Enter username" onChange={event => this.setState({ userName: event.target.value })} />
-                </Form.Group>
+            <div class="login-form">
+                <img class="logo" src={require('../img/CCCLogo.jpg')} /> 
+                <Form onSubmit={event => this.loginOnClick(event)}>
+                    <Form.Group controlId="formBasicUserName">
+                        <Form.Label>User Name</Form.Label>
+                        <Form.Control type="text" placeholder="Enter username" onChange={event => this.setState({ userName: event.target.value })} />
+                    </Form.Group>
 
-                <Form.Group controlId="formBasicPassword">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" onChange={event => this.setState({ password: event.target.value })} />
-                    <Form.Text className="text-muted">
-                        We'll never share your password with anyone else.
+                    <Form.Group controlId="formBasicPassword">
+                        <Form.Label>Password</Form.Label>
+                        <Form.Control type="password" placeholder="Password" onChange={event => this.setState({ password: event.target.value })} />
+                        <Form.Text className="text-muted">
+                            We'll never share your password with anyone else.
                    </Form.Text>
-                </Form.Group>
-                <Button variant="primary" type="submit">
-                    Log In
+                    </Form.Group>
+                    <Button variant="primary" type="submit">
+                        Log In
                 </Button>
-            </Form>
+                </Form>
+            </div>
         );
     }
 }

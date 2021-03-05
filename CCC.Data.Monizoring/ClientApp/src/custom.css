@@ -12,3 +12,23 @@ code {
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
+
+.login-form {
+    width: 550px;
+    height: 550px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 80px;
+}
+
+.logo {
+    margin: auto;
+    display: block;
+    height: 100px; 
+    margin-bottom: 35px; 
+}
+
+.table { 
+    max-height:70vh; 
+    overflow:auto;
+}

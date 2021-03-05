@@ -18,6 +18,7 @@ export class MonitorData extends Component {
 
     static renderMonitorDataTable(monitordatas) {
         return (
+            <div class="table">
             <table className='table table-striped' aria-labelledby="tabelLabel">
                 <thead>
                     <tr>
@@ -37,11 +38,12 @@ export class MonitorData extends Component {
                             <td>{monitordata.handled}</td>
                             <td>{monitordata.averageTalkTime}</td>
                             <td>{monitordata.averageHandlingTime}</td>
-                            <td style={{ background: monitordata.columnColour }}>{monitordata.serviceLevel}</td> 
+                            <td style={{ color: monitordata.columnColour, fontWeight: 600 }}>{monitordata.serviceLevel}</td> 
                         </tr>
                     )}
                 </tbody>
-            </table>
+                </table>
+                </div>
         );
     }
 
