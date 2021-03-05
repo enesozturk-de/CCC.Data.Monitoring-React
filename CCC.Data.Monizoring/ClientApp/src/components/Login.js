@@ -1,8 +1,7 @@
 ﻿import React, { Component } from 'react';
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { Redirect } from "react-router-dom";
-import { Alert } from "react-bs-notifier";
+import { Redirect } from "react-router-dom"; 
 
 export class Login extends Component {
     static displayName = Login.name;
@@ -10,9 +9,7 @@ export class Login extends Component {
     constructor(props) {
         super(props);
         this.state = { isSuccess: Boolean, userName: String, password: String }
-        this.loginOnClick = this.loginOnClick.bind(this);
-        this.checkLoggedInStatus = this.checkLoggedInStatus.bind(this);
-        this.alertDismissibleExample = this.alertDismissibleExample.bind(this);
+        this.loginOnClick = this.loginOnClick.bind(this); 
     }
 
     loginOnClick(event) {
@@ -24,7 +21,7 @@ export class Login extends Component {
     sendLoginRequest() {
         let loginModel = {
             Username: this.state.userName.trim(),
-            Password: this.state.password.trim()
+            Password: this.state.password
         }
         const requestOptions = {
             method: 'POST',
@@ -34,31 +31,18 @@ export class Login extends Component {
             },
             body: JSON.stringify(loginModel)
         };
-
+         
         fetch('api/user/login', requestOptions)
-            .then(this.checkLoggedInStatus)
-            .catch(this.alertDismissibleExample);
+            .then(response => {
+                if (response.ok && response.status >= 200 && response.status < 300) {
+                    this.setState({ isSuccess: true });
+                } else {
+                    alert("Check your information and try again!!!");
+                }
+            });
     }
-
-    checkLoggedInStatus(res) {
-        if (res.status >= 200 && res.status < 300) {
-            this.setState({ isSuccess: true });
-        } else if (res.status == 599) {
-            this.setState({ isSuccess: false });
-            this.alertDismissibleExample();
-        }
-    }
-
-    alertDismissibleExample() {
-        return (
-            <Alert variant="danger" dismissible>
-                <p>
-                    Please check your information and try again!!!
-                </p>
-            </Alert>
-        );
-    }
-
+ 
+    
     render() {
         if (this.state.isSuccess === true) {
             return <Redirect to="/monitor-data" />;
