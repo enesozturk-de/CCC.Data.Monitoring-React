@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace CCC.Data.Monitoring.Data.Access
 {
-    public class DataGenerator : IDataGenerator
+    public class DataGenerator : IDataGenerator, IDisposable
     {
         private readonly IMonitorDataRepository _monitorDataRepository;
         private readonly IQueueGroupRepository _queueGroupRepository;
@@ -84,6 +84,11 @@ namespace CCC.Data.Monitoring.Data.Access
         public void UpdateData()
         {
             //ENES: Ne need to fill for this project
+        }
+
+        public void Dispose()
+        { 
+            GC.SuppressFinalize(this);
         }
     }
 }
