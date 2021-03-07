@@ -39,5 +39,11 @@ namespace CCC.Data.Monitoring.Data.Access.EFCore.Repositories
         {
             return Context.Set<TEntity>().SingleOrDefault(predicate);
         }
+        
+        public void UpdateRange(IEnumerable<TEntity> entities)
+        {
+            Context.UpdateRange(entities);
+            Context.SaveChanges();
+        }
     }
 }

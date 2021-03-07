@@ -11,5 +11,6 @@ namespace CCC.Data.Monitoring.Concrete.Interfaces
         void Add(TEntity entity);
         void AddRange(IEnumerable<TEntity> entities);
         TEntity SingleOrDefault(Expression<Func<TEntity, bool>> predicate);
+        void UpdateRange(IEnumerable<TEntity> entities);
     }
 }
