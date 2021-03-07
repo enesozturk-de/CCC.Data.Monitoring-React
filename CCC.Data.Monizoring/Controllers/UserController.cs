@@ -37,8 +37,7 @@ namespace CCC.Data.Monitoring.Controllers
                 var timer = new System.Threading.Timer((e) =>
                 {
                     using (DataGenerator dataGenerator = new DataGenerator())
-                    {
-                        //DataGenerator dataGenerator = new DataGenerator();
+                    { 
                         dataGenerator.UpdateTableWithRandomData(); 
                     }
                 }, null, startTimeSpan, periodTimeSpan);
