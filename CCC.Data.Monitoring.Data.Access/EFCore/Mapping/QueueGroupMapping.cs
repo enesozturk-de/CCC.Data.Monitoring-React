@@ -14,7 +14,7 @@ namespace CCC.Data.Monitoring.Data.Access.EFCore.Mapping
             builder.HasKey(x => x.ID);
             builder.Property(x => x.Name);
             builder.Property(x => x.SLA_Percent);
-            builder.Property(x => x.SLA_Time);
+            builder.Property(x => x.SLA_Time); 
         }
     }
 }
